@@ -1,0 +1,265 @@
+/*highlight.js*/
+/*Syntax highlighting for the Web*/
+/*@font-face {*/
+/*  font-family: "Roboto";*/
+/*  src: url("https://cdn.boblog.com/Roboto-Regular.ttf");*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: "NotoSansTC";*/
+/*  src: url("https://cdn.boblog.com/NotoSansTC-Regular.otf");*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: "SourceCodePro";*/
+/*  src: url("https://cdn.boblog.com/SourceCodePro-Regular.ttf");*/
+/*  font-weight: normal;*/
+/*}*/
+/*@font-face {*/
+/*  font-family: "SourceCodePro";*/
+/*  src: url("https://cdn.boblog.com/SourceCodePro-Bold.ttf");*/
+/*  font-weight: bold;*/
+/*}*/
+/*@font-face {*/
+/*  font-family: "SourceCodePro";*/
+/*  src: url("https://cdn.boblog.com/SourceCodePro-Medium.ttf");*/
+/*  font-weight: 600;*/
+/*}*/
+/*@font-face {*/
+/*  font-family: "JetBrainsMono";*/
+/*  src: url("https://cdn.boblog.com/JetBrainsMono-VariableFont_wght.ttf");*/
+/*}*/
+
+/*
+ * ===== 移动端适配的基座（L1）=====
+ *
+ * 起因：全站是「1024px 定宽」的写法（.header-inner / .container / .category-box 都是
+ * width: 1024px，文章页是 840px）。手机上视口只有 375px，页面实际需要 1032px，
+ * 结果右侧内容被裁掉、页面能左右拖动，搜索框和「问博客」按钮直接被推出屏幕。
+ *
+ * 修法是统一改成 width: 100% + max-width，再配左右 padding。
+ * 但这一步必须同时把 box-sizing 改成 border-box，否则 padding 会额外撑出去，
+ * 溢出一点都没修掉。这类「一处收口、全站受益」的规则放在全局 CSS 里最省事。
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* 关掉 iOS 横竖屏切换时的自动字号放大，否则手机上排版会跳 */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  /*
+   * 浏览器给 body 的默认外边距是 8px（之前没清）。
+   * 它会让所有 margin: 0 auto 的居中容器额外偏 8px，
+   * 也是 1024px 定宽在 1024px 视口下还溢出 8px 的原因。
+   */
+  margin: 0;
+}
+
+html, body {
+  /*font-family: SourceCodePro;*/
+}
+li {
+  /* list-style: none; */
+}
+
+img {
+  width: 100%;
+}
+
+pre {
+  padding: 1em;
+}
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+
+code.hljs {
+  padding: 3px 5px
+}
+
+.hljs {
+  color: #abb2bf;
+  font-size: 13px;
+  background: #282c34
+}
+.hljs code {
+  /*font-family: SourceCodePro;*/
+  /*font-family: "JetBrainsMono";*/
+}
+
+.hljs-comment,.hljs-quote {
+  color: #5c6370;
+  font-style: italic
+}
+
+.hljs-doctag,.hljs-formula,.hljs-keyword {
+  color: #c678dd
+}
+
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst {
+  color: #e06c75
+}
+
+.hljs-literal {
+  color: #56b6c2
+}
+
+.hljs-addition,.hljs-attribute,.hljs-meta .hljs-string,.hljs-regexp,.hljs-string {
+  color: #98c379
+}
+
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable {
+  color: #d19a66
+}
+
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title {
+  color: #61aeee
+}
+
+.hljs-built_in,.hljs-class .hljs-title,.hljs-title.class_ {
+  color: #e6c07b
+}
+
+.hljs-emphasis {
+  font-style: italic
+}
+
+.hljs-strong {
+  font-weight: 700
+}
+
+.hljs-link {
+  text-decoration: underline
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+.pagination {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+@media (max-width: 768px) {
+  /*
+   * 手机端分页只保留上一页/页码/下一页。
+   * 「共 N 条」这段文字在 320px 屏幕上会把分页器挤到超出容器，信息量却很低。
+   *
+   * 这里必须写成三层选择器：element-ui 自己用
+   *   .el-pagination span:not([class*=suffix]) { display: inline-block }
+   * 设了 display，特异性是 (0,2,1)，比两层选择器的 (0,2,0) 高，
+   * 写两层会被它盖掉（样式表里明明有这条规则，页面却不生效）。
+   */
+  .pagination .el-pagination .el-pagination__total {
+    display: none;
+  }
+}
+
+/* ============================================================
+ * ===== 视觉体系（2026-10 全站改版）=====
+ *
+ * 目标：整体换成 workbuddy.cn 那种「纯白底 + 近黑文字 + 薄荷绿点缀」
+ * 的观感，差别主要落在排版尺度和留白上，而不是功能。
+ *
+ * 为什么变量必须收口在这一处：
+ *   要改的是全站（3 个页面 + 6 个组件），配色、圆角、间距如果各写各的，
+ *   改完必然出现「这里新那里旧」的混搭。收口之后以后调色只改这一块。
+ *
+ * 色值不是凭印象调的，是从参考站截图上取像素测出来的：
+ *   底色 #FFFFFF、正文 #1A1A1A、次级文字 #9A9A9A、
+ *   强调绿 #0BC8A0（深一档 #009273）、薄荷浅底 #E9FFF4、奶油面 #FFFCF5。
+ * ============================================================ */
+:root {
+  /* --- 底色与面板 --- */
+  --c-bg: #ffffff;
+  --c-surface: #f7f8f9; /* 浅灰面板：次级按钮底、缩略图占位 */
+  --c-surface-warm: #fffcf5; /* 奶油面板 */
+  --c-surface-mint: #e9fff4; /* 薄荷浅底：选中态、强调块的背景 */
+  --c-line: #ededed; /* 常规分隔线 */
+  --c-line-strong: #dedede; /* 需要更明确边界时（输入框、卡片描边） */
+
+  /* --- 文字三级。参考站正文特别黑（#1A1A1A 而不是常见的 #333），这是它显“高级”的一半原因 --- */
+  --c-text: #1a1a1a; /* 标题、正文 */
+  --c-text-2: #5c5c5c; /* 描述、次级信息 */
+  --c-text-3: #9a9a9a; /* 日期、辅助说明 */
+
+  /* --- 强调色：薄荷绿。用量必须克制，它是点缀不是主色 --- */
+  --c-accent: #0bc8a0;
+  --c-accent-deep: #009273; /* 浅底上的文字要用深一档，否则对比度不够 */
+  --c-accent-soft: #e9fff4;
+
+  /* --- 深色块：页脚、主按钮。参考站的主 CTA 是近黑胶囊，不是彩色按钮 --- */
+  --c-ink: #1a1a1a;
+  --c-ink-hover: #333333;
+
+  /* --- 圆角：参考站用得很夸张，8px 只留给小控件 --- */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* --- 间距节奏：全站只用这七档，避免出现 13px、27px 这种随手写的值 --- */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 48px;
+  --sp-6: 64px;
+  --sp-7: 96px;
+
+  /* --- 容器宽度：列表页比原来 1024 宽一点，正文比原来 840 窄一点 --- */
+  --w-page: 1120px;
+  --w-read: 760px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  /* 参考站的字看着比同字号更利落，一半来自字体平滑 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--c-surface-mint);
+  color: var(--c-accent-deep);
+}
+
+/*
+ * 代码块原来跟的是 atom-one-dark 的 #282c34。
+ * 换成 #1a1a1a 是为了和页脚、主按钮用同一个「近黑」，
+ * 整站只有一种深色，看起来才像一套东西。
+ */
+.hljs {
+  border-radius: var(--r-md);
+  /* 覆盖上面 atom-one-dark 的 #282c34：整站只保留一种深色（#1A1A1A） */
+  background: var(--c-ink);
+}
+
+/* ============================================================
+ * element-ui 的皮肤覆盖不在这里，在 assets/css/theme.css。
+ *
+ * 原因：这个文件在 nuxt.config.js 的 css 数组里排在
+ * element-ui/lib/theme-chalk/index.css 的【前面】。同权重选择器下，
+ * 后加载的 element-ui 主题会把这里写的覆盖全部盖掉——
+ * 症状是「样式表里明明写了，页面上分页器还是原来的蓝色」。
+ * 所以那些规则必须放到 element-ui 之后加载的文件里。
+ * ============================================================ */

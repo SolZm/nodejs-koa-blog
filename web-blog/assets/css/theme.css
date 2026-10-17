@@ -1,0 +1,92 @@
+/* ============================================================
+ * element-ui 的皮肤覆盖
+ *
+ * 【为什么单独一个文件】
+ * 这些规则必须排在 element-ui 自带主题【之后】加载才生效。
+ * nuxt.config.js 的 css 数组顺序是：
+ *   common.css → element-ui 主题 → theme.css（本文件）
+ * 之前把这段写在 common.css 里，同权重选择器下被后加载的
+ * element-ui 主题盖掉了，症状是「样式表里写了，页面上分页器还是蓝色」。
+ *
+ * 变量定义（--c-ink / --r-pill 等）在 common.css 的 :root 里。
+ * ============================================================ */
+
+/* 分页器：当前页做成近黑实心，其余是浅灰胶囊 */
+.el-pagination.is-background .el-pager li,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .btn-next {
+  border-radius: var(--r-pill);
+  background: var(--c-surface);
+  color: var(--c-text-2);
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background: var(--c-ink);
+  color: #fff;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover,
+.el-pagination.is-background .btn-prev:hover,
+.el-pagination.is-background .btn-next:hover {
+  color: var(--c-accent-deep);
+}
+
+.el-pagination__total,
+.el-pagination__jump {
+  color: var(--c-text-3);
+}
+
+/* 主按钮：近黑胶囊，和头部「问博客」同一套 */
+.el-button--primary {
+  background: var(--c-ink);
+  border-color: var(--c-ink);
+  border-radius: var(--r-pill);
+  font-weight: 500;
+}
+
+.el-button--primary:hover,
+.el-button--primary:focus {
+  background: var(--c-ink-hover);
+  border-color: var(--c-ink-hover);
+}
+
+.el-button {
+  border-radius: var(--r-pill);
+}
+
+/* 输入框：去掉默认的方角蓝框 */
+.el-input__inner,
+.el-textarea__inner {
+  border-radius: var(--r-md);
+  border-color: var(--c-line-strong);
+  color: var(--c-text);
+}
+
+.el-input__inner:focus,
+.el-textarea__inner:focus {
+  border-color: var(--c-accent);
+}
+
+/* 头像默认是灰蓝 #c0c4cc，换成薄荷底 + 深绿图标 */
+.el-avatar {
+  background: var(--c-surface-mint);
+  color: var(--c-accent-deep);
+}
+
+.el-drawer {
+  background: var(--c-bg);
+}
+
+.el-dropdown-menu {
+  border-radius: var(--r-md);
+  border-color: var(--c-line);
+}
+
+.el-dropdown-menu__item {
+  color: var(--c-text-2);
+}
+
+.el-dropdown-menu__item:hover {
+  background: var(--c-surface-mint);
+  color: var(--c-accent-deep);
+}

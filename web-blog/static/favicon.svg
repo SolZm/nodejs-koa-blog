@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="tile" x1="8" y1="5" x2="56" y2="59" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16332B"/>
+      <stop offset="1" stop-color="#07110E"/>
+    </linearGradient>
+    <linearGradient id="letter" x1="24" y1="17" x2="48" y2="47" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9CFFE1"/>
+      <stop offset="0.55" stop-color="#0BC8A0"/>
+      <stop offset="1" stop-color="#00A87D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(48 12) rotate(128) scale(33)">
+      <stop stop-color="#0BC8A0" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#0BC8A0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-glow" x="13" y="8" width="40" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="15" fill="url(#tile)"/>
+  <rect width="64" height="64" rx="15" fill="url(#glow)"/>
+  <rect x="1.25" y="1.25" width="61.5" height="61.5" rx="13.75" stroke="#B6FFE8" stroke-opacity="0.18" stroke-width="1.5"/>
+
+  <path
+    d="M23.5 17.5V46.5M23.5 18H45.5C46.6 18 47.5 18.9 47.5 20V23.5C47.5 24.6 46.6 25.5 45.5 25.5H29.5V31H41.5C42.6 31 43.5 31.9 43.5 33V35C43.5 36.1 42.6 37 41.5 37H29.5"
+    stroke="#0BC8A0"
+    stroke-opacity="0.28"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#soft-glow)"
+  />
+  <path
+    d="M23.5 17.5V46.5M23.5 18H45.5C46.6 18 47.5 18.9 47.5 20V23.5C47.5 24.6 46.6 25.5 45.5 25.5H29.5V31H41.5C42.6 31 43.5 31.9 43.5 33V35C43.5 36.1 42.6 37 41.5 37H29.5"
+    stroke="url(#letter)"
+    stroke-width="5.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
