@@ -1,0 +1,120 @@
+:root {
+  font-family: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #1f2329;
+  background: #f6f7f9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+:root,
+:root[data-theme="light"] {
+  --admin-bg: #f6f7f9;
+  --admin-card: rgba(255, 255, 255, 0.92);
+  --admin-card-solid: #ffffff;
+  --admin-border: #e8eaed;
+  --admin-text: #1f2329;
+  --admin-text-secondary: #6b7280;
+  --admin-sidebar: #ffffff;
+  --admin-hover: #f2f4f7;
+  --admin-shadow: 0 1px 2px rgba(15, 23, 42, 0.03), 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="dark"] {
+  --admin-bg: #0f1115;
+  --admin-card: rgba(24, 27, 33, 0.92);
+  --admin-card-solid: #181b21;
+  --admin-border: #2a2e37;
+  --admin-text: #f5f7fa;
+  --admin-text-secondary: #9ca3af;
+  --admin-sidebar: #15181e;
+  --admin-hover: #20242c;
+  --admin-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.page-shell {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  box-shadow: var(--admin-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.text-secondary {
+  color: var(--admin-text-secondary);
+}
+
+.search-panel {
+  padding: 20px 20px 4px;
+  margin-bottom: 16px;
+}
+
+.content-panel {
+  padding: 20px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pagination-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.markdown-body {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.markdown-body pre {
+  overflow-x: auto;
+  padding: 14px;
+  border-radius: 10px;
+  background: #111827;
+  color: #e5e7eb;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .content-panel,
+  .search-panel {
+    padding: 16px;
+  }
+}
