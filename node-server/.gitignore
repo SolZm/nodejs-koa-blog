@@ -1,0 +1,67 @@
+# 依赖目录
+node_modules/
+
+# 环境变量文件（通常包含敏感信息）
+.env
+.env.local
+.env.*.local
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 运行时数据
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 测试覆盖率报告
+coverage/
+.nyc_output/
+
+# 测试运行时写出的 token（含 JWT，不要提交）
+token.txt
+
+# 编辑器/IDE 临时文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 构建产物（如果有）
+dist/
+build/
+*.tgz
+*.zip
+
+# 临时文件
+tmp/
+temp/
+
+# Yarn / npm 缓存
+.yarn/
+.yarn-integrity
+package-lock.json
+yarn.lock
+
+# 密钥文件
+*.pem
+*.key
+*.crt
+
+# 操作系统生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
